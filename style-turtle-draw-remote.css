@@ -1,0 +1,25 @@
+
+/*
+CSS for Turtle Draw Remote Control web app
+Ron Pulcer (c) 2016
+Developed 2016 June - July for Rutland (VT) Mini Maker Faire (2016-07-30)
+*/
+
+body { background-color: lightgray; }
+
+h1 { font-size: 18px; color: #0000CC }
+h2 { font-size: 14px; color: #008800 }
+
+label { font-weight: bold; font-size: 14px;}
+
+td { text-align: center; }
+
+.btn { font-size: 14px; font-weight: bold; }
+.btn_dir    { background: #88FFFF; }
+.btn_spin   { background: #FF88FF; }
+.btn_bounce { background: #8888FF; }
+.btn_shake  { background: #88FF88; }
+.btn_shape  { background: #FFFF88; }
+
+.colorSwatch { width: 50px; }
+.randomColor { width: 175px; }

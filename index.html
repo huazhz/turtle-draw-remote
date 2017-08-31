@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+
+<!--
+turtle-draw-remote-control.html
+Ron Pulcer (c) 2016-2017
+
+Interface for Turtle Draw Remote Control web app
+Originally developed for Rutland (VT) Mini Maker Faire (2016-07-30)
+
+2016 June - July: Initial development of remote control interface.
+2016-08-30: Added Msg textbox control to write a message (for use with CCV Website Development course).
+2017-08-29: Added more options to Step select list and set default to 50px, to help with viewing on larger/projector screens.
+            Changed Speed default from 3 to 5.
+-->
+
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+<meta name="description" content="Py Turtle Draw: Remote Control: client-side web app" />
+<meta name="keywords" content="Rutland, Vermont, Mini Maker Faire, Maker Faire, Ron Pulcer, Python, Turtle drawing, remote control, HTML, CSS, JavaScript, AJAX, PHP" />
+<meta name="author" content="Ron Pulcer" />
+
+<title>Py Turtle Draw: Remote Control</title>
+
+<link rel="stylesheet" type="text/css" href="style-turtle-draw-remote.css">
+</head>
+
+
+<body onload="pageLoad()">
+
+  <h1>Py Turtle Draw: Remote Control</h1>
+  <h2>Made in Vermont by Ron Pulcer</h2>
+
+  <form action="#">
+
+    <table summary="">
+    <tr>
+      <td>&nbsp;&nbsp;<img class="colorSwatch" id="turtle_swatch" src="pyTurtle_transparent_turtle.gif" alt="Turtle color swatch" /></td>
+      <td>&nbsp;</td>
+      <td><label for="fname">First Name:</label>
+        <input style="width: 120px;" type="text" id="fname">
+      </td>
+    </tr>
+    </table>
+
+<!-- Hidden field replaced by above turtle_swatch -->
+<!-- <label for="turtle_color" id="label_tcolor">Turtle Color:</label> -->
+<!-- <input class="randomColor" type="hidden" id="turtle_color" value="Turtle Color" disabled="true"> -->
+
+    &nbsp;&nbsp;
+    <input class="btn" style="background:#88FF88;" type="button" id="start_remote"  value="Start" onclick="startRemote()">
+    &nbsp;
+    <input class="btn" style="background:#FF8888;" type="button" id="stop_remote"   value="Stop"  onclick="stopRemote()" disabled="true">
+    &nbsp;
+    <input class="btn" style="background:#FFFFFF;" type="button" id="clear_display" value="Clear" onclick="clearDisplay()">
+    &nbsp;
+    <input class="btn" style="background:#FFFF88;" type="button" id="instructions"  value="Help"  onclick="display_instructions()">
+    &nbsp;
+
+
+    <table summary="">
+
+    <tr>
+      <td colspan="3"><hr /></td>
+    </tr>
+
+    <tr>
+      <td style="vertical-align: top">
+        <label for="speed">Speed:</label><br />
+        <select id="speed">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5" selected="selected">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select>
+      </td>
+      <td style="vertical-align: top">
+        <label for="step">Step:</label><br />
+        <select id="step">
+          <option value="10">10 pixels</option>
+          <option value="20">20 pixels</option>
+          <option value="30">30 pixels</option>
+          <option value="40">40 pixels</option>
+          <option value="50" selected="selected">50 pixels</option>
+          <option value="60">60 pixels</option>
+          <option value="70">70 pixels</option>
+          <option value="80">80 pixels</option>
+          <option value="90">90 pixels</option>
+          <option value="100">100 pixels</option>
+        </select>
+      </td>
+      <td style="vertical-align: top">
+        <label for="pen_down">Pen Down:</label><br />
+        <input class="btn" type="checkbox" id="pen_down" value="Pen Down">
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="3"><hr /></td>
+    </tr>
+
+    <tr>
+      <td>&nbsp;</td>
+      <td><label for="dir_north">DIRECTION:</label></td>
+      <td>&nbsp;</td>
+    </tr>
+
+    <tr>
+      <td><input class="btn btn_dir" type="button" id="dir_northwest" value="NW"    onclick="direction('northwest')"></td>
+      <td><input class="btn btn_dir" type="button" id="dir_north"     value="North" onclick="direction('north')"></td>
+      <td><input class="btn btn_dir" type="button" id="dir_northeast" value="NE"    onclick="direction('northeast')"></td>
+      <td>&nbsp;</td>
+    </tr>
+
+    <tr>
+      <td><input class="btn btn_dir" type="button" id="dir_west" value="West" onclick="direction('west')"></td>
+      <td><input class="btn btn_dir" type="button" id="dir_center" value="Center" onclick="centerXY()"></td>
+      <td><input class="btn btn_dir" type="button" id="dir_east" value="East" onclick="direction('east')"></td>
+    </tr>
+
+    <tr>
+      <td><input class="btn btn_dir" type="button" id="dir_southwest" value="SW"    onclick="direction('southwest')"></td>
+      <td><input class="btn btn_dir" type="button" id="dir_south"     value="South" onclick="direction('south')"></td>
+      <td><input class="btn btn_dir" type="button" id="dir_southeast" value="SE"    onclick="direction('southeast')"></td>
+    </tr>
+
+    <tr>
+      <td>&nbsp;</td>
+      <td><label for="spin_left">SPIN:</label></td>
+      <td>&nbsp;</td>
+    </tr>
+
+    <tr>
+      <td><input class="btn btn_spin" type="button" id="spin_left"  value="Left"  onclick="spinLeft()"></td>
+      <td>
+        <select id="spin_times">
+          <option value="1">1 time</option>
+          <option value="2">2 times</option>
+          <option value="3">3 times</option>
+          <option value="4">4 times</option>
+          <option value="5">5 times</option>
+        </select>
+      </td>
+      <td><input class="btn btn_spin" type="button" id="spin_right" value="Right" onclick="spinRight()"></td>
+    </tr>
+
+    <tr>
+      <td>&nbsp;</td>
+      <td><label for="hop_up">BOUNCE:</label></td>
+      <td>&nbsp;</td>
+    </tr>
+
+    <tr>
+      <td><input class="btn btn_bounce" type="button" id="hop_up"   value="Hop"  onclick="hop()"></td>
+      <td>
+        <select id="bounce_times">
+          <option value="1">1 time</option>
+          <option value="2">2 times</option>
+          <option value="3">3 times</option>
+          <option value="4">4 times</option>
+          <option value="5">5 times</option>
+        </select>
+      </td>
+      <td><input class="btn btn_bounce" type="button" id="dip_down" value="Dip" onclick="dip()"></td>
+    </tr>
+
+    <tr>
+      <td>&nbsp;</td>
+      <td><label for="shake_horiz">SHAKE:</label></td>
+      <td>&nbsp;</td>
+    </tr>
+
+    <tr>
+      <td><input class="btn btn_shake" type="button" id="shake_horiz" value="Horizontal" onclick="shakeHoriz()"></td>
+      <td><input class="btn btn_shake" type="button" id="shake_both"  value="Both"       onclick="shakeBoth()"></td>
+      <td><input class="btn btn_shake" type="button" id="shake_vert"  value="Vertical"   onclick="shakeVert()"></td>
+    </tr>
+
+    <tr>
+      <td>&nbsp;</td>
+      <td><label for="shake_vert">SHAPES:</label></td>
+      <td>&nbsp;</td>
+    </tr>
+
+    <tr>
+      <td><input class="btn btn_shape" type="button" id="circle"   value="Circle"   onclick="makeShape('circle')"></td>
+      <td><input class="btn btn_shape" type="button" id="triangle" value="Triangle" onclick="makeShape('triangle')"></td>
+      <td><input class="btn btn_shape" type="button" id="square"   value="Square"   onclick="makeShape('square')"></td>
+    </tr>
+
+    <tr>
+      <td><input class="btn btn_shape" type="button" id="pentagon" value="Pentagon" onclick="makeShape('pentagon')"></td>
+      <td><label for="fill_color">Fill Color:</label>
+        <input class="btn btn_shape" type="checkbox" id="fill_color" value="Fill Color">
+      </td>
+      <td><input class="btn btn_shape" type="button" id="hexagon"  value="Hexagon"  onclick="makeShape('hexagon')"></td>
+    </tr>
+
+    <tr>
+      <td><input class="btn btn_shape" type="button" id="septagon" value="Septagon" onclick="makeShape('septagon')"></td>
+      <td><input class="btn btn_shape" type="button" id="octagon"  value="Octagon"  onclick="makeShape('octagon')"></td>
+      <td><input class="btn btn_shape" type="button" id="nonagon"  value="Nonagon"  onclick="makeShape('nonagon')"></td>
+    </tr>
+
+    <tr>
+      <td colspan="3"><hr /></td>
+    </tr>
+
+    </table>
+
+
+    <table summary="">
+    <tr>
+      <td><input class="btn" style="background:#FF8888;" type="button" id="send_msg"  value="Msg" onclick="sendMessage()"></td>
+      <td>&nbsp;</td>
+      <td><input style="width: 210px;" type="text" id="message"></td>
+    </tr>
+    <tr>
+      <td colspan="3">Please keep your message "clean".  Thanks!</td>
+    </tr>
+    <tr>
+      <td colspan="3"><hr /></td>
+    </tr>
+    </table>
+
+
+    <label for="debug_mode">Debug Mode:</label>
+    <input class="btn" type="checkbox" id="debug_mode" value="Debug Mode">
+
+  </form>
+
+  <div id="commands">
+  </div>
+
+
+  <script type="text/javascript" src="turtle-draw-remote.js">
+  </script>
+
+</body>
+</html> 
