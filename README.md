@@ -1,24 +1,24 @@
 # turtle-draw-remote
-Run Python turtle module drawing commands remotely via web interface (i.e. smartphone "remote control")
-
 "Remote Control" Drawing App
+
+Run Python turtle module drawing commands remotely via web interface (i.e. smartphone "remote control")
 
 The issues I was "addressing" (more so than "solving" a problem):
 
-1) Increase my CCV Web Dev. students' "awareness" of the various aspects of web apps (browser + server-side code, data store).
-2) Entice students to later pursue another programming course (JavaScript, PHP, Java or Python).
-3) Fun in-class activity at start of semester, where CCV students can begin to get to know each other.
-4) Maker Faire: Entice younger kids to gain awareness and interest in programming / software development.
+1. Increase my CCV Web Dev. students' "awareness" of the various aspects of web apps (browser + server-side code, data store).
+2. Entice students to later pursue another programming course (JavaScript, PHP, Java or Python).
+3. Fun in-class activity at start of semester, where CCV students can begin to get to know each other.
+4. Maker Faire: Entice younger kids to gain awareness and interest in programming / software development.
 
 Notes:
 
 The Website Development course's "Essential Objectives" primarily include HTML and CSS.  There are only slight mentions of app "behavior" or interactivity via JavaScript, and server-side code such as PHP.  Today's students think more in terms of web apps or apps, not merely static web pages (i.e. brochure-ware).  Learning to build web apps requires more than just one course at CCV.
 
-My idea for this app originally came during the June 2016 CCV Summer Institute in the first morning's presentation and activity.  The workshop's theme was on how to engage student interest and participation via a variety of class activities, including games / game-ification.
+My idea for this app originally came during the June 2016 CCV Summer Institute in the first morning's presentation and activity.  The workshop's theme was on how to engage student interest and participation via a variety of class activities, including games / gamification.
 
 I had previously taught the Python Programming course at CCV, which included Python Turtle drawing projects and assignments.  One homework assignment required students to programmatically read and parse an XML file of drawing commands and parameters, and then perform the correct drawing actions.  The students had to match a static drawing shown in the textbook.  My idea was that students could make drawings in near real-time, by a user clicking or pressing buttons on a "remote control" web interface.
 
-This was initially developed for the Website Development course I taught at CCV-Rutland for an in-class activity.
+This was initially created for the Website Development course I taught at CCV-Rutland for an in-class activity.
 
 In addition, the downtown Rutland Sidewalk Sale in August 2016 included the Rutland Mini Maker Faire.  I later demonstrated this app again at The Mint Makerspace Grand Opening on August 12, 2017.
 
@@ -26,7 +26,7 @@ The "remote control" interface can be run from smartphones.  Attendees can use t
 
 I set the goal of completing the app in time for the 2016 Rutland Maker Faire, in order to more fully test the app components, and to also be ready for CCV course in September 2016.
 
-The "remote control" app is multi-user: The users don't have to know about each other, but if they are standing or sitting near each other, it can be a fun and "competitive" activity (students, parents and kids).  "Competitive" is subjective, as their are "no rules", just an opportunity to "play" (draw, animate, play chase / tag)
+The "remote control" app is multi-user: The users don't have to know about each other, but if they are standing or sitting near each other, it can be a fun and "competitive" activity (students, parents and kids).  "Competitive" is subjective, as there are "no rules", just an opportunity to "play" (draw, animate, play chase / tag)
 
 
 Version 1: Most of the drawing related buttons features were developed prior to the Rutland Maker Faire in August 2016.
