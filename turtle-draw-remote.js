@@ -4,6 +4,7 @@
 // Originally developed for Rutland (VT) Mini Maker Faire (2016-07-30)
 // 2016 June - July: Initial development
 // 2016-08-30: Added message function for use with CCV Website Development course
+// 2017-09-02: Add IF debug around "Recv:" output line (after AJAX response)
 
 var fname = "";
 var dir = "";
@@ -90,7 +91,10 @@ function saveCmd(url) {
   var xmlhttp = getAJAXRequest();
   xmlhttp.onreadystatechange = function() {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-      document.getElementById("commands").innerHTML += "Recv: " + xmlhttp.responseText + "<br />";
+      var debug = document.getElementById("debug_mode").checked;
+      if(debug) {
+        document.getElementById("commands").innerHTML += "Recv: " + xmlhttp.responseText + "<br />";
+      }
       // alert("enabling...");
       disableControls(false);
     }
